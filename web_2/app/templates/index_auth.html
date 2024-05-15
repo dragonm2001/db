@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявки</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles_auth.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="{{ url_for('static', filename='js/scripts_auth.js') }}"></script>
+</head>
+
+<body class="flex items-center justify-center h-screen bg-gray-100">
+    <div class="bg-white p-8 rounded shadow-md w-96">
+        <h2 class="text-2xl font-semibold mb-6 text-center">Войдите в систему</h2>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="alert alert-warning">
+              {% for message in messages %}
+                {{ message }}
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+        <form method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="form-input mb-4">
+                {{ form.username.label(class="block text-gray-700 font-semibold mb-2") }}
+                <div class="relative">
+                    {{ form.username(class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-400") }}
+                    {% if form.username.errors %}
+                        {% for error in form.username.errors %}
+                            <div class="invalid-feedback" style="display:block;">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form-input relative mb-4">
+                {{ form.password.label(class="block text-gray-700 font-semibold mb-2") }}
+                <div class="relative">
+                    {{ form.password(class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-400") }}
+                    {% if form.password.errors %}
+                        {% for error in form.password.errors %}
+                            <div class="invalid-feedback" style="display:block;">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="password-toggle" onclick="togglePasswordVisibility()">
+                        <i class="fas fa-eye"></i>
+                        <i class="fas fa-eye-slash"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md w-full") }}
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

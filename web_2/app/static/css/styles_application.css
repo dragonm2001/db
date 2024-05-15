@@ -1,0 +1,115 @@
+/* styles_application.css */
+
+.hidden {
+    display: none;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    z-index: 1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.separator {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+/* Стили для меню */
+.menu-item {
+    display: flex;
+    align-items: center;
+    height: 3rem; /* Высота строки меню */
+}
+
+/* Отступ между иконкой и текстом */
+.menu-item i {
+    margin-right: 1rem;
+}
+
+
+input[type="text"]::-webkit-input-placeholder {
+    color: #9ca3af;
+}
+
+input[type="text"]::-moz-placeholder {
+    color: #9ca3af;
+}
+
+input[type="text"]:-moz-placeholder {
+    color: #9ca3af;
+}
+
+input[type="text"]:-ms-input-placeholder {
+    color: #9ca3af;
+}
+
+input[type="text"]::placeholder {
+    color: #9ca3af;
+}
+
+input[type="text"]:focus::placeholder {
+    color: transparent;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.dropdown-content {
+    /* Добавляем отступ сверху */
+    margin-top: 2px;
+}
+
+
+/* Стили для модального окна добавления новой заявки */
+#addRequestModal {
+    display: none;
+}
+
+#addRequestModal .fixed {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+
+.active {
+    background-color: #4a5568; /* Измени цвет фона на активной кнопке */
+    color: white; /* Измени цвет текста на активной кнопке */
+}
+
+.selected {
+    background-color: #3b82f6; /* синий цвет кнопки фильтра */
+    color: white;
+}
+
+
+.tab-btn {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.selected {
+    background-color: #3b82f6;
+    color: white;
+}
+
+
+
+

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявки</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles_application.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="{{ url_for('static', filename='js/scripts_application.js') }}"></script>
+</head>
+
+<body>
+    <div class="flex h-screen bg-gray-100">
+        <!-- Боковое меню -->
+        <aside class="w-64 bg-gray-800">
+            <div class="flex flex-col h-full">
+                <!-- Заголовок меню -->
+                <div class="flex items-center justify-center h-16 text-white text-xl font-semibold bg-gray-900">
+                    Меню
+                </div>
+                <!-- Список вкладок -->
+                <nav class="flex-1 overflow-y-auto">
+                    <ul class="py-4">
+                        <!-- Пункт меню "Заявки" -->
+                        <li><a href="C:\Users\drago\Desktop\web_2\applications\index_application.html" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white menu-item" ><i class="fas fa-clipboard-list"></i> Заявки</a></li>
+                        
+                        <!-- Пункт меню "Договора аренды" -->
+                        <li><a href="C:\Users\drago\Desktop\web_2\lease_agreement\index_lease_agreement.html" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white menu-item"><i class="fas fa-file-contract"></i> Договора аренды</a></li>
+                        
+                        <!-- Пункт меню "Помещения" -->
+                        <li><a href="C:\Users\drago\Desktop\web_2\property\index_property.html" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white menu-item"><i class="fas fa-building"></i> Помещения</a></li>
+                        
+                        <!-- Пункт меню "Арендодатели" -->
+                        <li><a href="C:\Users\drago\Desktop\web_2\landlords\index_landlords.html" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white menu-item"><i class="fas fa-user-tie"></i> Арендодатели</a></li>
+                        
+                        <!-- Пункт меню "Арендаторы" -->
+                        <li><a href="C:\Users\drago\Desktop\web_2\tenants\index_tenants.html" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white menu-item"><i class="fas fa-address-book"></i> Арендаторы</a></li>
+                        
+                        <!-- Пункт меню "Отчетность" -->
+                        <li><a class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white menu-item active" unselectable="on" onselectstart="return false;" onmousedown="return false;"><i class="fas fa-file-alt"></i> Отчетность</a></li>
+                    </ul>
+                </nav>
+                <!-- Аккаунт -->
+                <div class="bg-gray-900 text-white p-4 flex justify-between items-center">
+                    <p class="mb-0">Имя аккаунта</p>
+                    <button class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">Выход</button>
+                </div>
+            </div>
+        </aside>
+        <!-- Основное содержимое -->
+        <main class="flex-1 overflow-y-auto p-6">
+            <!-- Заголовок текущей вкладки -->
+            <h1 class="text-2xl font-semibold mb-4">Отчетность</h1>
+            <!-- Разделитель -->
+            <div class="separator"></div>
+            <!-- Контент информации -->
+            <div class="bg-white p-6 rounded-lg shadow-md overflow-x-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Блок "Количество заявок" -->
+                    <div class="bg-green-200 p-4 rounded-lg h-64">
+                        <h2 class="text-lg font-semibold text-center mb-2">Количество заявок</h2>
+                        <hr class="border-t-1 border-green-500 my-2">
+                        <!-- Выбор промежутка времени -->
+                        <div class="mt-auto flex items-center">
+                            <input type="date" id="applications-start" name="applications-start" class="border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500 flex-grow mr-1 text-sm h-10 px-1" style="width: 120px;">
+                            <span>-</span>
+                            <input type="date" id="applications-end" name="applications-end" class="border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500 flex-grow mx-1 text-sm h-10 px-1" style="width: 120px;">
+                            <!-- Выбор формата файла -->
+                            <select class="border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500 flex-grow mx-1 text-sm h-10 px-2" style="width: 100px;">
+                                <option value="excel">Excel</option>
+                                <option value="pdf">PDF</option>
+                                <option value="csv">CSV</option>
+                            </select>
+                            <!-- Промежуток -->
+                            <div class="flex-grow"></div>
+                            <!-- Кнопка предпросмотра -->
+                            <button class="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600 flex items-center h-10 text-xs mx-1">
+                                <i class="far fa-eye mr-1"></i> <!-- Иконка глаза -->
+                                Предпросмотр
+                            </button>
+                            <!-- Кнопка скачивания -->
+                            <button class="ml-1 bg-green-700 text-white py-1 px-2 rounded hover:bg-green-800 flex items-center h-10 text-xs">
+                                <i class="fas fa-download mr-1"></i>
+                                Скачать
+                            </button>
+                        </div>
+                        <p class="text-xs mt-2 description">Этот блок предоставляет информацию о количестве заявок, поступивших за определенный период времени. Заявки могут быть связаны с арендой жилья, коммерческих помещений или других объектов. Здесь вы можете выбрать интересующий вас временной диапазон и формат файла для выгрузки данных. Предпросмотр позволяет просмотреть данные перед загрузкой, а кнопка "Скачать" позволяет сохранить данные на ваше устройство.</p>
+                    </div>
+                    <!-- Блок "Количество арендодателей" -->
+                    <div class="bg-yellow-200 p-4 rounded-lg h-64">
+                        <h2 class="text-lg font-semibold text-center mb-2">Количество арендодателей</h2>
+                        <hr class="border-t-1 border-yellow-500 my-2">
+                        <!-- Выбор промежутка времени -->
+                        <div class="mt-auto flex items-center">
+                            <input type="date" id="landlords-start" name="landlords-start" class="border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500 flex-grow mr-1 text-sm h-10 px-1" style="width: 120px;">
+                            <span>-</span>
+                            <input type="date" id="landlords-end" name="landlords-end" class="border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500 flex-grow mx-1 text-sm h-10 px-1" style="width: 120px;">
+                            <!-- Выбор формата файла -->
+                            <select class="border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500 flex-grow mx-1 text-sm h-10 px-2" style="width: 100px;">
+                                <option value="excel">Excel</option>
+                                <option value="pdf">PDF</option>
+                                <option value="csv">CSV</option>
+                            </select>
+                            <!-- Промежуток -->
+                            <div class="flex-grow"></div>
+                            <!-- Кнопка предпросмотра -->
+                            <button class="bg-yellow-500 text-white py-1 px-2 rounded hover:bg-yellow-600 flex items-center h-10 text-xs mx-1">
+                                <i class="far fa-eye mr-1"></i> <!-- Иконка глаза -->
+                                Предпросмотр
+                            </button>
+                            <!-- Кнопка скачивания -->
+                            <button class="ml-1 bg-yellow-700 text-white py-1 px-2 rounded hover:bg-yellow-800 flex items-center h-10 text-xs">
+                                <i class="fas fa-download mr-1"></i>
+                                Скачать
+                            </button>
+                        </div>
+                        <p class="text-xs mt-2 description">Этот блок отображает информацию о количестве арендодателей за выбранный период времени. Арендодатели - это лица или компании, которые предоставляют свои недвижимые имущества в аренду. Выберите нужный временной промежуток и формат файла для экспорта данных. Предпросмотр поможет вам убедиться в правильности данных перед их загрузкой, а кнопка "Скачать" позволит сохранить данные на вашем устройстве.</p>
+                    </div>
+            
+                    <!-- Блок "Количество договоров" -->
+                    <div class="bg-purple-200 p-4 rounded-lg h-64">
+                        <h2 class="text-lg font-semibold text-center mb-2">Количество договоров</h2>
+                        <hr class="border-t-1 border-purple-500 my-2">
+                        <!-- Выбор промежутка времени -->
+                        <div class="mt-auto flex items-center">
+                            <input type="date" id="agreements-start" name="agreements-start" class="border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 flex-grow mr-1 text-sm h-10 px-1" style="width: 120px;">
+                            <span>-</span>
+                            <input type="date" id="agreements-end" name="agreements-end" class="border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 flex-grow mx-1 text-sm h-10 px-1" style="width: 120px;">
+                            <!-- Выбор формата файла -->
+                            <select class="border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 flex-grow mx-1 text-sm h-10 px-2" style="width: 100px;">
+                                <option value="excel">Excel</option>
+                                <option value="pdf">PDF</option>
+                                <option value="csv">CSV</option>
+                            </select>
+                            <!-- Промежуток -->
+                            <div class="flex-grow"></div>
+                            <!-- Кнопка предпросмотра -->
+                            <button class="bg-purple-500 text-white py-1 px-2 rounded hover:bg-purple-600 flex items-center h-10 text-xs mx-1">
+                                <i class="far fa-eye mr-1"></i> <!-- Иконка глаза -->
+                                Предпросмотр
+                            </button>
+                            <!-- Кнопка скачивания -->
+                            <button class="ml-1 bg-purple-700 text-white py-1 px-2 rounded hover:bg-purple-800 flex items-center h-10 text-xs">
+                                <i class="fas fa-download mr-1"></i>
+                                Скачать
+                            </button>
+                        </div>
+                        <p class="text-xs mt-2 description">Этот блок содержит информацию о количестве заключенных договоров аренды за определенный период времени. Договоры аренды устанавливают права и обязанности между арендаторами и арендодателями. Выберите нужный временной диапазон и формат файла для экспорта данных. Предпросмотр поможет вам убедиться в правильности данных перед их загрузкой, а кнопка "Скачать" позволит сохранить данные на вашем устройстве.</p>
+                    </div>
+            
+                    <!-- Блок "Количество помещений" -->
+                    <div class="bg-gray-200 p-4 rounded-lg h-64">
+                        <h2 class="text-lg font-semibold text-center mb-2">Количество помещений</h2>
+                        <hr class="border-t-1 border-gray-500 my-2">
+                        <!-- Выбор промежутка времени -->
+                        <div class="mt-auto flex items-center">
+                            <input type="date" id="properties-start" name="properties-start" class="border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-500 flex-grow mr-1 text-sm h-10 px-1" style="width: 120px;">
+                            <span>-</span>
+                            <input type="date" id="properties-end" name="properties-end" class="border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-500 flex-grow mx-1 text-sm h-10 px-1" style="width: 120px;">
+                            <!-- Выбор формата файла -->
+                            <select class="border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-500 flex-grow mx-1 text-sm h-10 px-2" style="width: 100px;">
+                                <option value="excel">Excel</option>
+                                <option value="pdf">PDF</option>
+                                <option value="csv">CSV</option>
+                            </select>
+                            <!-- Промежуток -->
+                            <div class="flex-grow"></div>
+                            <!-- Кнопка предпросмотра -->
+                            <button class="bg-gray-500 text-white py-1 px-2 rounded hover:bg-gray-600 flex items-center h-10 text-xs mx-1">
+                                <i class="far fa-eye mr-1"></i> <!-- Иконка глаза -->
+                                Предпросмотр
+                            </button>
+                            <!-- Кнопка скачивания -->
+                            <button class="ml-1 bg-gray-700 text-white py-1 px-2 rounded hover:bg-gray-800 flex items-center h-10 text-xs">
+                                <i class="fas fa-download mr-1"></i>
+                                Скачать
+                            </button>
+                        </div>
+                        <p class="text-xs mt-2 description">Этот блок отображает информацию о количестве арендуемых помещений за определенный период времени. Это может включать в себя жилые квартиры, коммерческие офисы, магазины и другие типы недвижимости. Выберите нужный временной диапазон и формат файла для экспорта данных. Предпросмотр поможет вам убедиться в правильности данных перед их загрузкой, а кнопка "Скачать" позволит сохранить данные на вашем устройстве.
+                        </p>
+                    </div>
+            
+                    <!-- Блок "Количество арендаторов" -->
+                    <div class="bg-pink-200 p-4 rounded-lg h-64">
+                        <h2 class="text-lg font-semibold text-center mb-2">Количество арендаторов</h2>
+                        <hr class="border-t-1 border-pink-500 my-2">
+                        <!-- Выбор промежутка времени -->
+                        <div class="mt-auto flex items-center">
+                            <input type="date" id="tenants-start" name="tenants-start" class="border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500 flex-grow mr-1 text-sm h-10 px-1" style="width: 120px;">
+                            <span>-</span>
+                            <input type="date" id="tenants-end" name="tenants-end" class="border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500 flex-grow mx-1 text-sm h-10 px-1" style="width: 120px;">
+                            <!-- Выбор формата файла -->
+                            <select class="border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500 flex-grow mx-1 text-sm h-10 px-2" style="width: 100px;">
+                                <option value="excel">Excel</option>
+                                <option value="pdf">PDF</option>
+                                <option value="csv">CSV</option>
+                            </select>
+                            <!-- Промежуток -->
+                            <div class="flex-grow"></div>
+                            <!-- Кнопка предпросмотра -->
+                            <button class="bg-pink-500 text-white py-1 px-2 rounded hover:bg-pink-600 flex items-center h-10 text-xs mx-1">
+                                <i class="far fa-eye mr-1"></i> <!-- Иконка глаза -->
+                                Предпросмотр
+                            </button>
+                            <!-- Кнопка скачивания -->
+                            <button class="ml-1 bg-pink-700 text-white py-1 px-2 rounded hover:bg-pink-800 flex items-center h-10 text-xs">
+                                <i class="fas fa-download mr-1"></i>
+                                Скачать
+                            </button>
+                        </div>
+                        <p class="text-xs mt-2 description">Этот блок содержит информацию о количестве арендаторов за определенный период времени. Арендаторы - это лица или компании, которые арендуют недвижимость для своих нужд. Выберите нужный временной диапазон и формат файла для экспорта данных. Предпросмотр поможет вам убедиться в правильности данных перед их загрузкой, а кнопка "Скачать" позволит сохранить данные на вашем устройстве.
+                        </p>
+                    </div>
+            
+                    <!-- Второй блок "Количество заявок" -->
+                    <div class="bg-blue-200 p-4 rounded-lg h-64">
+                        <h2 class="text-lg font-semibold text-center mb-2">Количество заявок</h2>
+                        <hr class="border-t-1 border-blue-500 my-2">
+                        <!-- Выбор промежутка времени -->
+                        <div class="mt-auto flex items-center">
+                            <input type="date" id="applications-start" name="applications-start" class="border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 flex-grow mr-1 text-sm h-10 px-1" style="width: 120px;">
+                            <span>-</span>
+                            <input type="date" id="applications-end" name="applications-end" class="border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 flex-grow mx-1 text-sm h-10 px-1" style="width: 120px;">
+                            <!-- Выбор формата файла -->
+                            <select class="border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 flex-grow mx-1 text-sm h-10 px-2" style="width: 100px;">
+                                <option value="excel">Excel</option>
+                                <option value="pdf">PDF</option>
+                                <option value="csv">CSV</option>
+                            </select>
+                            <!-- Промежуток -->
+                            <div class="flex-grow"></div>
+                            <!-- Кнопка предпросмотра -->
+                            <button class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600 flex items-center h-10 text-xs mx-1">
+                                <i class="far fa-eye mr-1"></i> <!-- Иконка глаза -->
+                                Предпросмотр
+                            </button>
+                            <!-- Кнопка скачивания -->
+                            <button class="ml-1 bg-blue-700 text-white py-1 px-2 rounded hover:bg-blue-800 flex items-center h-10 text-xs">
+                                <i class="fas fa-download mr-1"></i>
+                                Скачать
+                            </button>
+                        </div>
+                        <p class="text-xs mt-2 description">Этот блок предоставляет информацию о количестве заявок, поступивших за определенный период времени. Заявки могут быть связаны с арендой жилья, коммерческих помещений или других объектов. Здесь вы можете выбрать интересующий вас временной диапазон и формат файла для выгрузки данных. Предпросмотр позволяет просмотреть данные перед загрузкой, а кнопка "Скачать" позволяет сохранить данные на ваше устройство.</p>
+                    </div>
+
+
+                    <!-- Блок "Количество заявок" -->
+<div class="bg-red-200 p-4 rounded-lg h-64">
+    <h2 class="text-lg font-semibold text-center mb-2">Количество заявок</h2>
+    <hr class="border-t-1 border-red-500 my-2">
+    <!-- Выбор промежутка времени -->
+    <div class="mt-auto flex items-center">
+        <input type="date" id="applications-start" name="applications-start" class="border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500 flex-grow mr-1 text-sm h-10 px-1" style="width: 120px;">
+        <span>-</span>
+        <input type="date" id="applications-end" name="applications-end" class="border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500 flex-grow mx-1 text-sm h-10 px-1" style="width: 120px;">
+        <!-- Выбор формата файла -->
+        <select class="border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500 flex-grow mx-1 text-sm h-10 px-2" style="width: 100px;">
+            <option value="excel">Excel</option>
+            <option value="pdf">PDF</option>
+            <option value="csv">CSV</option>
+        </select>
+        <!-- Промежуток -->
+        <div class="flex-grow"></div>
+        <!-- Кнопка предпросмотра -->
+        <button class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600 flex items-center h-10 text-xs mx-1">
+            <i class="far fa-eye mr-1"></i> <!-- Иконка глаза -->
+            Предпросмотр
+        </button>
+        <!-- Кнопка скачивания -->
+        <button class="ml-1 bg-red-700 text-white py-1 px-2 rounded hover:bg-red-800 flex items-center h-10 text-xs">
+            <i class="fas fa-download mr-1"></i>
+            Скачать
+        </button>
+    </div>
+    <p class="text-xs mt-2 description">Этот блок предоставляет информацию о количестве заявок, поступивших за определенный период времени. Заявки могут быть связаны с арендой жилья, коммерческих помещений или других объектов. Здесь вы можете выбрать интересующий вас временной диапазон и формат файла для выгрузки данных. Предпросмотр позволяет просмотреть данные перед загрузкой, а кнопка "Скачать" позволяет сохранить данные на ваше устройство.</p>
+</div>
+
+<!-- Блок "Количество арендодателей" -->
+<div class="bg-indigo-200 p-4 rounded-lg h-64">
+    <h2 class="text-lg font-semibold text-center mb-2">Количество арендодателей</h2>
+    <hr class="border-t-1 border-indigo-500 my-2">
+    <!-- Выбор промежутка времени -->
+    <div class="mt-auto flex items-center">
+        <input type="date" id="landlords-start" name="landlords-start" class="border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 flex-grow mr-1 text-sm h-10 px-1" style="width: 120px;">
+        <span>-</span>
+        <input type="date" id="landlords-end" name="landlords-end" class="border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 flex-grow mx-1 text-sm h-10 px-1" style="width: 120px;">
+        <!-- Выбор формата файла -->
+        <select class="border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 flex-grow mx-1 text-sm h-10 px-2" style="width: 100px;">
+            <option value="excel">Excel</option>
+            <option value="pdf">PDF</option>
+            <option value="csv">CSV</option>
+        </select>
+        <!-- Промежуток -->
+        <div class="flex-grow"></div>
+        <!-- Кнопка предпросмотра -->
+        <button class="bg-indigo-500 text-white py-1 px-2 rounded hover:bg-indigo-600 flex items-center h-10 text-xs mx-1">
+            <i class="far fa-eye mr-1"></i> <!-- Иконка глаза -->
+            Предпросмотр
+        </button>
+        <!-- Кнопка скачивания -->
+        <button class="ml-1 bg-indigo-700 text-white py-1 px-2 rounded hover:bg-indigo-800 flex items-center h-10 text-xs">
+            <i class="fas fa-download mr-1"></i>
+            Скачать
+        </button>
+    </div>
+    <p class="text-xs mt-2 description">Этот блок отображает информацию о количестве арендодателей за выбранный период времени. Арендодатели - это лица или компании, которые предоставляют свои недвижимые имущества в аренду. Выберите нужный временной промежуток и формат файла для экспорта данных. Предпросмотр поможет вам убедиться в правильности данных перед их загрузкой, а кнопка "Скачать" позволит сохранить данные на вашем устройстве.</p>
+</div>
+
+<!-- Блок "Количество договоров" -->
+<div class="bg-green-200 p-4 rounded-lg h-64">
+    <h2 class="text-lg font-semibold text-center mb-2">Количество договоров</h2>
+    <hr class="border-t-1 border-green-500 my-2">
+    <!-- Выбор промежутка времени -->
+    <div class="mt-auto flex items-center">
+        <input type="date" id="agreements-start" name="agreements-start" class="border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500 flex-grow mr-1 text-sm h-10 px-1" style="width: 120px;">
+        <span>-</span>
+        <input type="date" id="agreements-end" name="agreements-end" class="border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500 flex-grow mx-1 text-sm h-10 px-1" style="width: 120px;">
+        <!-- Выбор формата файла -->
+        <select class="border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500 flex-grow mx-1 text-sm h-10 px-2" style="width: 100px;">
+            <option value="excel">Excel</option>
+            <option value="pdf">PDF</option>
+            <option value="csv">CSV</option>
+        </select>
+        <!-- Промежуток -->
+        <div class="flex-grow"></div>
+        <!-- Кнопка предпросмотра -->
+        <button class="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600 flex items-center h-10 text-xs mx-1">
+            <i class="far fa-eye mr-1"></i> <!-- Иконка глаза -->
+            Предпросмотр
+        </button>
+        <!-- Кнопка скачивания -->
+        <button class="ml-1 bg-green-700 text-white py-1 px-2 rounded hover:bg-green-800 flex items-center h-10 text-xs">
+            <i class="fas fa-download mr-1"></i>
+            Скачать
+        </button>
+    </div>
+    <p class="text-xs mt-2 description">Этот блок содержит информацию о количестве заключенных договоров аренды за определенный период времени. Договоры аренды устанавливают права и обязанности между арендаторами и арендодателями. Выберите нужный временной диапазон и формат файла для экспорта данных. Предпросмотр поможет вам убедиться в правильности данных перед их загрузкой, а кнопка "Скачать" позволит сохранить данные на вашем устройстве.</p>
+</div>
+
+<!-- Блок "Количество помещений" -->
+<div class="bg-yellow-200 p-4 rounded-lg h-64">
+    <h2 class="text-lg font-semibold text-center mb-2">Количество помещений</h2>
+    <hr class="border-t-1 border-yellow-500 my-2">
+    <!-- Выбор промежутка времени -->
+    <div class="mt-auto flex items-center">
+        <input type="date" id="properties-start" name="properties-start" class="border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500 flex-grow mr-1 text-sm h-10 px-1" style="width: 120px;">
+        <span>-</span>
+        <input type="date" id="properties-end" name="properties-end" class="border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500 flex-grow mx-1 text-sm h-10 px-1" style="width: 120px;">
+        <!-- Выбор формата файла -->
+        <select class="border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500 flex-grow mx-1 text-sm h-10 px-2" style="width: 100px;">
+            <option value="excel">Excel</option>
+            <option value="pdf">PDF</option>
+            <option value="csv">CSV</option>
+        </select>
+        <!-- Промежуток -->
+        <div class="flex-grow"></div>
+        <!-- Кнопка предпросмотра -->
+        <button class="bg-yellow-500 text-white py-1 px-2 rounded hover:bg-yellow-600 flex items-center h-10 text-xs mx-1">
+            <i class="far fa-eye mr-1"></i> <!-- Иконка глаза -->
+            Предпросмотр
+        </button>
+        <!-- Кнопка скачивания -->
+        <button class="ml-1 bg-yellow-700 text-white py-1 px-2 rounded hover:bg-yellow-800 flex items-center h-10 text-xs">
+            <i class="fas fa-download mr-1"></i>
+            Скачать
+        </button>
+    </div>
+    <p class="text-xs mt-2 description">Этот блок отображает информацию о количестве арендуемых помещений за определенный период времени. Это может включать в себя жилые квартиры, коммерческие офисы, магазины и другие типы недвижимости. Выберите нужный временной диапазон и формат файла для экспорта данных. Предпросмотр поможет вам убедиться в правильности данных перед их загрузкой, а кнопка "Скачать" позволит сохранить данные на вашем устройстве.</p>
+</div>
+
+<!-- Блок "Количество арендаторов" -->
+<div class="bg-gray-200 p-4 rounded-lg h-64">
+    <h2 class="text-lg font-semibold text-center mb-2">Количество арендаторов</h2>
+    <hr class="border-t-1 border-gray-500 my-2">
+    <!-- Выбор промежутка времени -->
+    <div class="mt-auto flex items-center">
+        <input type="date" id="tenants-start" name="tenants-start" class="border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-500 flex-grow mr-1 text-sm h-10 px-1" style="width: 120px;">
+        <span>-</span>
+        <input type="date" id="tenants-end" name="tenants-end" class="border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-500 flex-grow mx-1 text-sm h-10 px-1" style="width: 120px;">
+        <!-- Выбор формата файла -->
+        <select class="border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-500 flex-grow mx-1 text-sm h-10 px-2" style="width: 100px;">
+            <option value="excel">Excel</option>
+            <option value="pdf">PDF</option>
+            <option value="csv">CSV</option>
+        </select>
+        <!-- Промежуток -->
+        <div class="flex-grow"></div>
+        <!-- Кнопка предпросмотра -->
+        <button class="bg-gray-500 text-white py-1 px-2 rounded hover:bg-gray-600 flex items-center h-10 text-xs mx-1">
+            <i class="far fa-eye mr-1"></i> <!-- Иконка глаза -->
+            Предпросмотр
+        </button>
+        <!-- Кнопка скачивания -->
+        <button class="ml-1 bg-gray-700 text-white py-1 px-2 rounded hover:bg-gray-800 flex items-center h-10 text-xs">
+            <i class="fas fa-download mr-1"></i>
+            Скачать
+        </button>
+    </div>
+    <p class="text-xs mt-2 description">Этот блок содержит информацию о количестве арендаторов за определенный период времени. Арендаторы - это лица или компании, которые арендуют недвижимость для своих нужд. Выберите нужный временной диапазон и формат файла для экспорта данных. Предпросмотр поможет вам убедиться в правильности данных перед их загрузкой, а кнопка "Скачать" позволит сохранить данные на вашем устройстве.</p>
+</div>
+
+
+            <!-- Модальное окно с информацией о системе -->
+            <div id="systemInfoModal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+                <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                    </div>
+                    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <div class="sm:flex sm:items-start">
+                                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modalTitle">
+                                        Информация о системе
+                                    </h3>
+                                    <div class="mt-2 text-sm text-gray-500">
+                                        <p><strong>Добро пожаловать в программу учета заявок на аренду помещений!</strong></p>
+                                        <p>Это руководство поможет вам освоить основные функции программы для эффективного управления данными о заявках, договорах аренды, помещениях, арендодателях и арендаторах.</p>
+                                        <ol class="list-decimal pl-6">
+                                            <li><strong>Вход в систему</strong><br>
+                                                Для входа в систему введите свои учетные данные (имя аккаунта и пароль) в соответствующие поля на экране входа. После ввода данных нажмите кнопку "Войти".</li>
+                                            <li><strong>Основные окна</strong><br>
+                                                <ol class="list-decimal pl-6">
+                                                    <li><strong>Заявки</strong><br>
+                                                        Окно "Заявки" предоставляет список всех заявок на аренду помещений. Вы можете использовать фильтры для фильтрации данных и поиск для быстрого нахождения нужной заявки.</li>
+                                                    <li><strong>Договоры аренды</strong><br>
+                                                        В окне "Договоры аренды" содержится информация о всех заключенных договорах аренды. Здесь также доступны фильтры и поиск для удобства работы с данными.</li>
+                                                    <li><strong>Помещения</strong><br>
+                                                        Окно "Помещения" содержит информацию о доступных помещениях для аренды. Вы можете просматривать и управлять списком помещений с помощью фильтров и поиска.</li>
+                                                    <li><strong>Арендодатели</strong><br>
+                                                        В окне "Арендодатели" содержится информация о лицах или организациях, предоставляющих помещения в аренду. Здесь также доступны фильтры и поиск для удобства работы с данными.</li>
+                                                    <li><strong>Арендаторы</strong><br>
+                                                        Окно "Арендаторы" содержит информацию о лицах или организациях, арендующих помещения. Вы можете управлять списком арендаторов с помощью фильтров и поиска.</li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                            <button type="button" class="w-full inline-flex justify-center rounded-lg border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm" onclick="closeSystemInfo()">
+                                Закрыть
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Кнопка "Информация о системе" -->
+            <button class="fixed bottom-4 right-4 flex items-center">
+                <i class="fas fa-info-circle text-gray-400 mr-2"></i>
+                <span class="text-sm text-gray-400 cursor-pointer hover:text-gray-600" onclick="toggleSystemInfoModal()">Информация о системе</span>
+            </button>
+        </main>
+    </div>
+</body>
+
+</html>

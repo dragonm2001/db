@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявки</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles_application.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="{{ url_for('static', filename='js/scripts_application.js') }}"></script>
+</head>
+
+<body>
+    <div class="flex h-screen bg-gray-100">
+        <!-- Боковое меню -->
+        <aside class="w-64 bg-gray-800">
+            <div class="flex flex-col h-full">
+                <!-- Заголовок меню -->
+                <div class="flex items-center justify-center h-16 text-white text-xl font-semibold bg-gray-900">
+                    Меню
+                </div>
+                <!-- Список вкладок -->
+                <nav class="flex-1 overflow-y-auto">
+                    <ul class="py-4">
+                        <!-- Пункт меню "Заявки" -->
+                        <li><a class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white menu-item " unselectable="on" onselectstart="return false;" onmousedown="return false;"><i class="fas fa-clipboard-list"></i> Заявки</a></li>
+                        
+                        <!-- Пункт меню "Договора аренды" -->
+                        <li><a href="#" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white menu-item" unselectable="on" onselectstart="return false;" onmousedown="return false;"><i class="fas fa-file-contract"></i> Договора аренды</a></li>
+                        
+                        <!-- Пункт меню "Помещения" -->
+                        <li><a href="C:\Users\drago\Desktop\web_2\property\index_property.html" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white menu-item" unselectable="on" onselectstart="return false;" onmousedown="return false;"><i class="fas fa-building"></i> Помещения</a></li>
+                        
+                        <!-- Пункт меню "Арендодатели" -->
+                        <li><a href="C:\Users\drago\Desktop\web_2\landlords\index_landlords.html" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white menu-item" unselectable="on" onselectstart="return false;" onmousedown="return false;"><i class="fas fa-user-tie"></i> Арендодатели</a></li>
+                        
+                        <!-- Пункт меню "Арендаторы" -->
+                        <li><a href="C:\Users\drago\Desktop\web_2\tenants\index_tenants.html" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white menu-item" unselectable="on" onselectstart="return false;" onmousedown="return false;"><i class="fas fa-address-book"></i> Арендаторы</a></li>
+                        
+                        <!-- Пункт меню "Отчетность" -->
+                        <li><a href="C:\Users\drago\Desktop\web_2\reporting\index_reporting.html" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white menu-item" unselectable="on" onselectstart="return false;" onmousedown="return false;"><i class="fas fa-file-alt"></i> Отчетность</a></li>
+                    </ul>
+                    
+                </nav>
+                <!-- Аккаунт -->
+                <div class="bg-gray-900 text-white p-4 flex justify-between items-center">
+                    <p class="mb-0">Имя аккаунта</p>
+                    <button class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">Выход</button>
+                </div>
+            </div>
+        </aside>
+        <!-- Основное содержимое -->
+        <main class="flex-1 overflow-y-auto p-6">
+            <!-- Заголовок текущей вкладки -->
+            <h1 class="text-2xl font-semibold mb-4">Заявки</h1>
+            <!-- Вкладки информации -->
+            <div class="mb-6 flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="relative">
+                        <input type="text" placeholder="Поиск..." class="bg-white focus:outline-none focus:ring focus:border-blue-300 rounded-md py-2 pl-10 pr-4 w-64">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div class="dropdown ml-4">
+                        <button id="filterBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md w-48" onclick="toggleDropdown()"><i class="fas fa-filter"></i> Фильтры</button>
+                        <div class="dropdown-content w-48 hidden" id="dropdownContent">
+                            <!-- Фильтры -->
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200" onclick="setFilter('Фильтр 1')">Фильтр 1</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200" onclick="setFilter('Фильтр 2')">Фильтр 2</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200" onclick="setFilter('Фильтр 3')">Фильтр 3</a>
+                        </div>
+                    </div>
+                </div>
+<button class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md w-48" onclick="openAddRequestModal()"><i class="fas fa-plus"></i> Добавить заявку</button>
+            </div>
+<!-- Разделитель -->
+<div class="separator"></div>
+
+<!-- Кнопки-вкладки для перехода между физическими и юридическими лицами -->
+<div class="flex justify-start mt-4">
+    <button class="tab-btn bg-white text-gray-700 font-semibold py-2 px-4 rounded-l-md rounded-bl-none focus:outline-none selected" onclick="switchToIndividual()">Физические лица</button>
+    <button class="tab-btn bg-white text-gray-700 font-semibold py-2 px-4 rounded-r-md rounded-br-none focus:outline-none" onclick="switchToLegal()">Юридические лица</button>
+</div>
+
+<!-- Контент информации -->
+<div class="bg-white p-6 rounded-lg shadow-md overflow-x-auto rounded-tl-none">
+    <!-- Таблица для отображения данных из базы данных -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200" id="data-table">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-4 py-3 text-left text-sm font-semibold text-gray-700">ID</th>
+                    <th scope="col" class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Имя клиента</th>
+                    <th scope="col" class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Адрес помещения</th>
+                    <th scope="col" class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Дата заявки</th>
+                    <th scope="col" class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Начало аренды</th>
+                    <th scope="col" class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Конец аренды</th>
+                    <th scope="col" class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Статус заявки</th>
+                    <th scope="col" class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Описание</th>
+                    <th scope="col" class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Крайний срок обработки</th>
+                    <th scope="col" class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Причина отклонения</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                {% for application in applications %}
+                <tr class="hover:bg-gray-100">
+                    <td class="px-4 py-4 whitespace-nowrap">{{ application.application_id }}</td>
+                    <td class="px-4 py-4 whitespace-nowrap cursor-pointer hover:text-blue-500" ondblclick="makeEditable(this)">{{ application.client.individual.last_name | safe }} {{ application.client.individual.first_name | safe}}</td>
+                    <td class="px-4 py-4 whitespace-nowrap cursor-pointer hover:text-blue-500" ondblclick="makeEditable(this)">{{ application.property.address }}</td>
+                    <td class="px-4 py-4 whitespace-nowrap cursor-pointer hover:text-blue-500" ondblclick="makeEditable(this)">{{ application.application_date }}</td>
+                    <td class="px-4 py-4 whitespace-nowrap cursor-pointer hover:text-blue-500" ondblclick="makeEditable(this)">{{ application.start_date }}</td>
+                    <td class="px-4 py-4 whitespace-nowrap cursor-pointer hover:text-blue-500" ondblclick="makeEditable(this)">{{ application.end_date }}</td>
+                    <td class="px-4 py-4 whitespace-nowrap cursor-pointer hover:text-blue-500" ondblclick="makeEditable(this)">{{ application.application_status }}</td>
+                    <td class="px-4 py-4 whitespace-nowrap cursor-pointer hover:text-blue-500" ondblclick="makeEditable(this)">{{ application.description }}</td>
+                    <td class="px-4 py-4 whitespace-nowrap cursor-pointer hover:text-blue-500" ondblclick="makeEditable(this)">{{ application.processing_deadline }}</td>
+                    <td class="px-4 py-4 whitespace-nowrap cursor-pointer hover:text-blue-500" ondblclick="makeEditable(this)">{{ application.rejection_reason }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Модальное окно с информацией о системе -->
+<div id="systemInfoModal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modalTitle">
+                            Информация о системе
+                        </h3>
+                        <div class="mt-2 text-sm text-gray-500">
+                            <p><strong>Добро пожаловать в программу учета заявок на аренду помещений!</strong></p>
+                            <p>Это руководство поможет вам освоить основные функции программы для эффективного управления данными о заявках, договорах аренды, помещениях, арендодателях и арендаторах.</p>
+                            <ol class="list-decimal pl-6">
+                                <li><strong>Вход в систему</strong><br>
+                                    Для входа в систему введите свои учетные данные (имя аккаунта и пароль) в соответствующие поля на экране входа. После ввода данных нажмите кнопку "Войти".</li>
+                                <li><strong>Основные окна</strong><br>
+                                    <ol class="list-decimal pl-6">
+                                        <li><strong>Заявки</strong><br>
+                                            Окно "Заявки" предоставляет список всех заявок на аренду помещений. Вы можете использовать фильтры для фильтрации данных и поиск для быстрого нахождения нужной заявки.</li>
+                                        <li><strong>Договоры аренды</strong><br>
+                                            В окне "Договоры аренды" содержится информация о всех заключенных договорах аренды. Здесь также доступны фильтры и поиск для удобства работы с данными.</li>
+                                        <li><strong>Помещения</strong><br>
+                                            Окно "Помещения" содержит информацию о доступных помещениях для аренды. Вы можете просматривать и управлять списком помещений с помощью фильтров и поиска.</li>
+                                        <li><strong>Арендодатели</strong><br>
+                                            В окне "Арендодатели" содержится информация о лицах или организациях, предоставляющих помещения в аренду. Здесь также доступны фильтры и поиск для удобства работы с данными.</li>
+                                        <li><strong>Арендаторы</strong><br>
+                                            Окно "Арендаторы" содержит информацию о лицах или организациях, арендующих помещения. Вы можете управлять списком арендаторов с помощью фильтров и поиска.</li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" class="w-full inline-flex justify-center rounded-lg border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm" onclick="closeSystemInfo()">
+                    Закрыть
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Кнопка "Информация о системе" -->
+    <button class="fixed bottom-4 right-4 flex items-center">
+        <i class="fas fa-info-circle text-gray-400 mr-2"></i>
+        <span class="text-sm text-gray-400 cursor-pointer hover:text-gray-600" onclick="toggleSystemInfoModal()">Информация о системе</span>
+    </button>
+
+<div id="addRequestModal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <!-- Заголовок модального окна -->
+                <h3 class="text-lg leading-6 font-medium text-gray-900 flex items-center" id="modalTitle">
+                    Добавить заявку
+                </h3>
+            </div>
+            <!-- Форма для добавления заявки -->
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row sm:justify-center">
+                <form class="w-full max-w-lg">
+                    <!-- Поле "Имя клиента" -->
+                    <div class="mb-4">
+                        <label for="clientName" class="block text-gray-700 text-sm font-bold mb-2">Имя клиента:</label>
+                        <input type="text" id="clientName" name="clientName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <!-- Поле "Адрес помещения" -->
+                    <div class="mb-4">
+                        <label for="propertyAddress" class="block text-gray-700 text-sm font-bold mb-2">Адрес помещения:</label>
+                        <input type="text" id="propertyAddress" name="propertyAddress" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <!-- Поле "Дата заявки" -->
+                    <div class="mb-4">
+                        <label for="requestDate" class="block text-gray-700 text-sm font-bold mb-2">Дата заявки:</label>
+                        <input type="date" id="requestDate" name="requestDate" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <!-- Поле "Начало аренды" -->
+                    <div class="mb-4">
+                        <label for="rentStartDate" class="block text-gray-700 text-sm font-bold mb-2">Начало аренды:</label>
+                        <input type="date" id="rentStartDate" name="rentStartDate" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <!-- Поле "Конец аренды" -->
+                    <div class="mb-4">
+                        <label for="rentEndDate" class="block text-gray-700 text-sm font-bold mb-2">Конец аренды:</label>
+                        <input type="date" id="rentEndDate" name="rentEndDate" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <!-- Поле "Статус заявки" -->
+                    <div class="mb-4">
+                        <label for="requestStatus" class="block text-gray-700 text-sm font-bold mb-2">Статус заявки:</label>
+                        <select id="requestStatus" name="requestStatus" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="new">Новая</option>
+                            <option value="pending">В ожидании</option>
+                            <option value="approved">Одобрена</option>
+                            <option value="rejected">Отклонена</option>
+                        </select>
+                    </div>
+                    <!-- Поле "Тип заявки" -->
+                    <div class="mb-4">
+                        <label for="requestType" class="block text-gray-700 text-sm font-bold mb-2">Тип заявки:</label>
+                        <select id="requestType" name="requestType" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="rental">Аренда</option>
+                            <option value="purchase">Покупка</option>
+                            <option value="service">Сервис</option>
+                        </select>
+                    </div>
+                    <!-- Поле "Описание" -->
+                    <div class="mb-4">
+                        <label for="requestDescription" class="block text-gray-700 text-sm font-bold mb-2">Описание:</label>
+                        <textarea id="requestDescription" name="requestDescription" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    </div>
+                    <!-- Поле "Крайний срок обработки" -->
+                    <div class="mb-4">
+                        <label for="processingDeadline" class="block text-gray-700 text-sm font-bold mb-2">Крайний срок обработки:</label>
+                        <input type="date" id="processingDeadline" name="processingDeadline" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <!-- Поле "Причина отклонения" -->
+                    <div class="mb-4">
+                        <label for="rejectionReason" class="block text-gray-700 text-sm font-bold mb-2">Причина отклонения:</label>
+                        <input type="text" id="rejectionReason" name="rejectionReason" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                </form>
+            </div>
+            <!-- Кнопки для сохранения и закрытия модального окна -->
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" class="w-full inline-flex justify-center rounded-lg border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm" onclick="saveRequest()">
+                    Сохранить
+                </button>
+                <button type="button" class="mt-3 w-full inline-flex justify-center rounded-lg border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:w-auto sm:text-sm" onclick="closeAddRequestModal()">
+                    Закрыть
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+</html>
